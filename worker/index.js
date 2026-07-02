@@ -1135,7 +1135,7 @@ const page = `<!doctype html>
         <div class="section-header" data-reveal>
           <div>
             <p class="kicker">impact highlights</p>
-            <h2>Selected work with concrete scope and measurable outcomes.</h2>
+            <h2>Production systems with measurable impact.</h2>
           </div>
         </div>
 
