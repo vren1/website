@@ -14,7 +14,6 @@ const watchTargets = [
   "worker/index.js",
   "assets/hero-workspace.png",
   "Victoria_Ren_Resume.docx",
-  ".openai/hosting.json",
   "scripts/build.mjs",
 ].map((target) => resolve(projectRoot, target));
 

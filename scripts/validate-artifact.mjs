@@ -5,7 +5,6 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 const projectRoot = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const workerPath = resolve(projectRoot, "dist/server/index.js");
-const manifestPath = resolve(projectRoot, "dist/.openai/hosting.json");
 
 const [source, manifest] = await Promise.all([
   readFile(workerPath, "utf8"),
@@ -22,7 +21,9 @@ assert.equal(
   `${pathToFileURL(workerPath)} must export default.fetch`,
 );
 
-const htmlResponse = await workerModule.default.fetch(new Request("https://site.test/"));
+const htmlResponse = await workerModule.default.fetch(
+  new Request("https://site.test/"),
+);
 assert.equal(htmlResponse.status, 200, "home route should return 200");
 assert.match(
   htmlResponse.headers.get("content-type") ?? "",
@@ -31,9 +32,17 @@ assert.match(
 );
 
 const html = await htmlResponse.text();
-assert.match(html, /Victoria Ren/, "home route should include portfolio content");
+assert.match(
+  html,
+  /Victoria Ren/,
+  "home route should include portfolio content",
+);
 assert.match(html, /ADELE/, "home route should include resume impact content");
-assert.match(html, /victoriaren7@gmail\.com/, "home route should include resume contact");
+assert.match(
+  html,
+  /victoriaren7@gmail\.com/,
+  "home route should include resume contact",
+);
 assert.match(
   html,
   /\/assets\/hero-workspace\.png/,
@@ -73,4 +82,6 @@ assert.ok(
   "resume route should return the bundled resume",
 );
 
-console.log("Artifact is valid ESM, exports default.fetch, and serves expected routes");
+console.log(
+  "Artifact is valid ESM, exports default.fetch, and serves expected routes",
+);

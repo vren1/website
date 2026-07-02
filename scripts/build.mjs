@@ -7,7 +7,6 @@ const distRoot = resolve(projectRoot, "dist");
 const workerPath = resolve(projectRoot, "worker/index.js");
 const heroPath = resolve(projectRoot, "assets/hero-workspace.png");
 const resumePath = resolve(projectRoot, "Victoria_Ren_Resume.docx");
-const manifestPath = resolve(projectRoot, ".openai/hosting.json");
 
 const [workerSource, heroImage, resumeDocx, manifest] = await Promise.all([
   readFile(workerPath, "utf8"),
@@ -37,8 +36,6 @@ const bundledWorker = workerSource
 
 await rm(distRoot, { recursive: true, force: true });
 await mkdir(resolve(distRoot, "server"), { recursive: true });
-await mkdir(resolve(distRoot, ".openai"), { recursive: true });
 await writeFile(resolve(distRoot, "server/index.js"), bundledWorker);
-await writeFile(resolve(distRoot, ".openai/hosting.json"), manifest);
 
 console.log(`Built ${distRoot}`);
