@@ -8,11 +8,10 @@ const workerPath = resolve(projectRoot, "worker/index.js");
 const heroPath = resolve(projectRoot, "assets/hero-workspace.png");
 const resumePath = resolve(projectRoot, "Victoria_Ren_Resume.docx");
 
-const [workerSource, heroImage, resumeDocx, manifest] = await Promise.all([
+const [workerSource, heroImage, resumeDocx] = await Promise.all([
   readFile(workerPath, "utf8"),
   readFile(heroPath),
   readFile(resumePath),
-  readFile(manifestPath, "utf8"),
 ]);
 
 for (const placeholder of [
